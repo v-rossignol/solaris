@@ -1,78 +1,83 @@
 # Solaris
 
-2D star system visualization client for the Infinity game.
+2D star system visualization client for **Infinity** (stars, planets, orbits, resources).
 
-## Overview
+Part of the [Infinity monorepo](../AGENTS.md). Agent guide: [AGENTS.md](AGENTS.md).
 
-Solaris is a web-based client that renders star systems in 2D, displaying stars, planets, and their resources. It is part of the Infinity monorepo ecosystem.
+## Stack
 
-## Features
+- **React 18** — UI framework
+- **TypeScript 5** — Type safety
+- **Vite 5** — Bundler and dev server
+- **PixiJS 7** — 2D system-map rendering
+- **Zustand 4** — State management
+- **Axios** — HTTP client
 
-- Real-time visualization of star systems
-- Display of planets with their types (rocky, gas, ice, lava)
-- Resource information overlay
-- Interactive navigation
+## Getting started
 
-## Tech Stack
+From the **monorepo root**, start shared infrastructure first (databases + Infinity Server) — see [../AGENTS.md](../AGENTS.md).
 
-- Framework: React 18
-- Language: TypeScript 5
-- Build Tool: Vite 5
-- 2D Rendering: PixiJS 7
-- State Management: Zustand 4
-- HTTP Client: Axios
+```bash
+cd solaris
+npm install
+npm run dev
+```
 
-## Getting Started
+Dev server: [http://localhost:3003/solaris/](http://localhost:3003/solaris/)
 
-### Prerequisites
+| Field | Value |
+|-------|-------|
+| Dev port | `3003` |
+| Base path | `/solaris/` |
+| API prefix | `/infinity/*` (proxied to `http://localhost:4000`) |
 
-- Node.js 18+
-- npm or yarn
+The Caddy route for `/solaris/*` is not wired yet — use the dev server URL directly until that is added (see [../documentation/TO-BE-FIXED.md](../documentation/TO-BE-FIXED.md)).
 
-### Installation
+## Scripts
 
-1. Clone the repository:
-   git clone https://github.com/v-rossignol/solaris.git
-   cd solaris
-
-2. Install dependencies:
-   npm install
-
-3. Start the development server:
-   npm run dev
-
-4. Open http://localhost:3002 in your browser.
+| Command | Description |
+| ------- | ----------- |
+| `npm run dev` | Development server (port 3003) |
+| `npm run build` | Production build → `dist/` |
+| `npm run preview` | Preview production build |
 
 ## Configuration
 
-The app connects to the Infinity Server API at /infinity. By default, it proxies to http://localhost:3000 in development. Update the proxy configuration in vite.config.ts to match your backend URL.
+REST calls use the `/infinity` prefix. In development, Vite proxies `/infinity/*` to the Infinity Server at `http://localhost:4000` (configure in `vite.config.ts` when the Vite scaffold is in place).
 
-## Project Structure
+## Project structure
 
+Early scaffold:
+
+```
 solaris/
-+-- src/
-|   +-- App.tsx           # Main application component
-|   +-- main.tsx          # React entry point
-|   +-- index.css         # Global styles
-|   +-- stores/
-|   |   +-- starSystemStore.ts  # Zustand store for star system data
-|   +-- types/
-|       +-- index.ts      # Type exports
-|       +-- starSystem.ts # Star system types
-|       +-- planet.ts     # Planet types
-+-- package.json
-+-- vite.config.ts
-+-- tsconfig.json
-+-- README.md
+├── src/
+│   └── vite-env.d.ts
+├── package.json
+├── .env.example
+├── AGENTS.md
+└── README.md
+```
 
-## Related Projects
+Target layout (see [AGENTS.md](AGENTS.md)):
 
-- Infinity Server - Backend API
-- Stellar Gate - Authentication client
-- Cosmos Governance - Admin client
-- Terra View - Planetary surface client
-- Galaxy View - 3D galaxy client (planned)
+```
+src/
+├── components/          # React UI + PixiJS canvas wrappers
+├── hooks/
+├── stores/              # starSystemStore (Zustand)
+├── types/
+├── App.tsx
+└── main.tsx
+vite.config.ts           # base: /solaris/, dev proxy to :4000
+```
 
-## License
+## Related projects
 
-MIT
+| Client | Directory | Role |
+| ------ | --------- | ---- |
+| Infinity Server | [`infinity/`](../infinity/) | Backend API |
+| Stellar Gate | [`stellar-gate/`](../stellar-gate/) | Authentication |
+| Cosmos Governance | [`cosmos-governance/`](../cosmos-governance/) | Administration |
+| Terra View | [`terra-view/`](../terra-view/) | Planetary surface (downstream) |
+| Galaxy View | `galaxy/` *(planned)* | 3D galaxy (upstream) |

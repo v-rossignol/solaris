@@ -1,0 +1,51 @@
+﻿# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Logs & debug
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Source maps (generated)
+*.map
+
+# Lock files (large; rarely needed for editing)
+package-lock.json
+
+# OS & editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Git metadata
+.git/
+
+# Large or binary assets (adjust when asset pipeline is added)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.mp3
+*.mp4
+*.woff
+*.woff2
+*.ttf
+*.eot
