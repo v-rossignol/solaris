@@ -88,7 +88,7 @@ Planet types and domain model: [../contracts/game-rules.md](../contracts/game-ru
 
 - Server stores **orbital distance** (`distanceFromStar`) for planets in a star system — clients derive map angles from planet index for display. Player position at system depth still uses local 2D map coordinates (`x`, `y`).
 - Client must map server coordinates to screen pixels; do not assume latitude/longitude or hex coords at this view level.
-- See [../infinity/documentation/wip/player-location/player-location.md](../infinity/documentation/wip/player-location/player-location.md).
+- See [../contracts/game-api.yaml](../contracts/game-api.yaml) and player location routes for server coordinate fields.
 
 ### API and real-time
 
@@ -100,7 +100,7 @@ Planet types and domain model: [../contracts/game-rules.md](../contracts/game-ru
 
 ### Navigation (cross-client)
 
-- Enter from **Galaxy View** via full page navigation with a selected `systemId` (handoff TBD — see [../documentation/architecture/3clients-analysis.md](../documentation/architecture/3clients-analysis.md)).
+- Enter from **Galaxy View** via full page navigation with a selected `systemId` (handoff TBD).
 - Select a planet → navigate to `/terra-view/` with the chosen `planetId` (full page navigation, not React Router across SPAs).
 - Return to galaxy → `POST /infinity/players/me/location/leave-system` then navigate to `/galaxy/`.
 
@@ -119,6 +119,8 @@ Planet types and domain model: [../contracts/game-rules.md](../contracts/game-ru
 ## Document conventions
 
 Shared monorepo standards: [../rules/documents.md](../rules/documents.md).
+
+**Working directory:** Do not read, search, or follow links into any `documentation/` directory (monorepo root, this sub-project, or another sub-project) unless the user explicitly references a path. Links elsewhere in this file are pointers for the user — use `../contracts/` and source code for implementation context.
 
 Code, paths, and API identifiers stay in **English**. Do not create documentation files unless explicitly requested.
 
@@ -165,6 +167,8 @@ Do not commit secrets (`.env`, credentials). Do not create git commits unless ex
 ---
 
 ## Reference docs
+
+Index for human navigation and explicit user references — **not** for agent auto-discovery.
 
 - [../contracts/game-api.yaml](../contracts/game-api.yaml) — REST contract (source of truth)
 - [../contracts/asyncapi.yaml](../contracts/asyncapi.yaml) — Socket.IO events
