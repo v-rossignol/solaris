@@ -63,7 +63,7 @@ vite.config.ts           # base: /solaris/, dev proxy to :4000
 |------|--------|--------|
 | App scaffold | Package + types only — no Vite config or entry yet | — |
 | PixiJS system map | Not started | — |
-| Star system data fetch | Not started | `GET /infinity/galaxy/systems/:systemId` |
+| Star system data fetch | Not started | `GET /infinity/systems/:systemId` |
 | Planet selection / handoff | Not started | `POST /infinity/players/me/location/enter-planet` |
 | Player position in system | Not started | `PATCH /infinity/players/me/location/system` |
 | Real-time sync | Not started | Socket.IO `SYSTEM_MOVE`, `SYSTEM_UPDATE` |
@@ -95,7 +95,7 @@ Planet types and domain model: [../contracts/game-rules.md](../contracts/game-ru
 - REST base path: `/infinity/*` (Vite dev proxy forwards to `:4000`).
 - Use `withCredentials: true` on HTTP clients when auth cookies are required.
 - Do **not** store JWT in `localStorage`, `sessionStorage`, or JS state.
-- `GET /infinity/galaxy/systems/:systemId` requires JWT; `systemId` is the parent star UUID.
+- `GET /infinity/systems/:systemId` requires JWT; `systemId` is the parent star UUID.
 - Socket.IO client integration is planned; event names and payloads follow server gateway conventions.
 
 ### Navigation (cross-client)
@@ -141,7 +141,7 @@ Canonical server reference: [../contracts/game-api.yaml](../contracts/game-api.y
 
 | Method | Route | Auth | Description |
 | ------ | ----- | ---- | ----------- |
-| GET | `/infinity/galaxy/systems/:systemId` | JWT | Get or generate a star system (`systemId` = star UUID) |
+| GET | `/infinity/systems/:systemId` | JWT | Get or generate a star system (`systemId` = star UUID) |
 | POST | `/infinity/players/me/location/enter-system` | JWT | View transition: cube → star system |
 | POST | `/infinity/players/me/location/enter-planet` | JWT | View transition: star system → planet |
 | POST | `/infinity/players/me/location/leave-planet` | JWT | View transition: planet → star system |
